@@ -1,4 +1,4 @@
-package com.mypay.membership;
+package com.mypay.common;
 
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Component
-public @interface ExternalSystemAdapter {
+public @interface WebAdapter {
 
     @AliasFor(annotation = Component.class)
     String value() default "";
