@@ -152,7 +152,7 @@ services:
       - LOGGING_TOPIC=mypay.logging.out.stdout
 
   task-consumer:
-    image: demo-task-consumer:1.0.0
+    image: demo-task-consumer:0.0.1-SNAPSHOT
     networks:
       - mypay-network
     restart: always
