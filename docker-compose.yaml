@@ -69,6 +69,7 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
       - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
       - LOGGING_TOPIC=mypay.logging.out.stdout
+      - SERVICE_MEMBERSHIP_URL=http://membership-service:8080
 
   money-service:
     image: demo-money-service:0.0.1-SNAPSHOT
@@ -90,6 +91,9 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
       - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
       - LOGGING_TOPIC=mypay.logging.out.stdout
+      - TASK_TOPIC=mypay.task.topic
+      - TASK_RESULT_TOPIC=mypay.task.result.topic
+      - SERVICE_MEMBERSHIP_URL=http://membership-service:8080
 
   zookeeper:
     image: 'zookeeper'
@@ -147,6 +151,19 @@ services:
       - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
       - LOGGING_TOPIC=mypay.logging.out.stdout
 
+  task-consumer:
+    image: mypay-task-consumer:1.0.0
+    networks:
+      - mypay-network
+    restart: always
+    depends_on:
+      - kafka
+      - zookeeper
+    environment:
+      - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
+      - LOGGING_TOPIC=mypay.logging.out.stdout
+      - TASK_TOPIC=mypay.task.topic
+      - TASK_RESULT_TOPIC=mypay.task.result.topic
 
 #volumes:
 #  axonserver-data:
