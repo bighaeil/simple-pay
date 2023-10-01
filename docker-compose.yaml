@@ -136,7 +136,7 @@ services:
       - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
 
   logging-consumer:
-    image: mypay-logging-consumer:0.0.1-SNAPSHOT
+    image: demo-logging-consumer:0.0.1-SNAPSHOT
     networks:
       - mypay-network
     restart: always
