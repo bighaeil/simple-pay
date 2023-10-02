@@ -70,6 +70,7 @@ services:
       - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
       - LOGGING_TOPIC=mypay.logging.out.stdout
       - SERVICE_MEMBERSHIP_URL=http://membership-service:8080
+      - SERVICE_BANKING_URL=http://banking-service:8080
 
   money-service:
     image: demo-money-service:0.0.1-SNAPSHOT
@@ -94,6 +95,7 @@ services:
       - TASK_TOPIC=mypay.task.topic
       - TASK_RESULT_TOPIC=mypay.task.result.topic
       - SERVICE_MEMBERSHIP_URL=http://membership-service:8080
+      - SERVICE_BANKING_URL=http://banking-service:8080
 
   zookeeper:
     image: 'zookeeper'

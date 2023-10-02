@@ -178,7 +178,9 @@ public class IncreaseMoneyRequestService implements IncreaseMoneyRequestUseCase,
         );
         String aggregateIdentifier = entity.getAggregateIdentifier();
 
-        // command
+        // Saga 의 시작을 나타내는 커맨드!
+        // RechargingMoneyRequestCreateCommand
+
         commandGateway.send(
                         IncreaseMemberMoneyCommand.builder()
                                 .aggregateIdentifier(aggregateIdentifier)
