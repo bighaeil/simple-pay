@@ -218,6 +218,32 @@ services:
       - SERVICE_MEMBERSHIP_URL=http://membership-service:8080
       - SERVICE_BANKING_URL=http://banking-service:8080
 
+  money-aggregation-service:
+    image: demo-money-aggregation-service:0.0.1-SNAPSHOT
+    networks:
+      - mypay-network
+    ports:
+      - "8087:8080"
+    restart: always
+    depends_on:
+      - kafka
+      - mysql
+    environment:
+      - AXON_AXONSERVER_SERVERS=axon-server:8124
+      - AXON_SERIALIZER_EVENTS=jackson
+      - AXON_SERIALIZER_MESSAGES=jackson
+      - AXON_SERIALIZER_GENERAL=xstream
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/my_pay?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL5InnoDBDialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+      - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
+      - LOGGING_TOPIC=mypay.logging.out.stdout
+      - SERVICE_MEMBERSHIP_URL=http://membership-service:8080
+      - SERVICE_BANKING_URL=http://banking-service:8080
+      - SERVICE_MONEY_URL=http://money-service:8080
+
 volumes:
   axonserver-data:
     driver: local
