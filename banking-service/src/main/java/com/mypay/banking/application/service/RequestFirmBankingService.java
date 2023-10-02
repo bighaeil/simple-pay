@@ -51,7 +51,8 @@ public class RequestFirmBankingService implements RequestFirmBankingUseCase, Upd
                         command.getFromBankName(),
                         command.getFromBankAccountNumber(),
                         command.getToBankName(),
-                        command.getToBankAccountNumber()
+                        command.getToBankAccountNumber(),
+                        command.getMoneyAmount()
                 )
         );
 
@@ -107,7 +108,8 @@ public class RequestFirmBankingService implements RequestFirmBankingUseCase, Upd
                                         command.getFromBankName(),
                                         command.getFromBankAccountNumber(),
                                         command.getToBankName(),
-                                        command.getToBankAccountNumber()
+                                        command.getToBankAccountNumber(),
+                                        command.getMoneyAmount()
                                 )
                         );
 
