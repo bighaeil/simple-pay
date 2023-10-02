@@ -9,9 +9,9 @@ import java.util.Random;
 public class DummyDataGenerator {
 
     // MySQL 데이터베이스 연결 정보
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/fastcampus_pay"; // 데이터베이스 URL
-    private static final String DB_USER = "mysqluser"; // 데이터베이스 사용자명
-    private static final String DB_PASSWORD = "mysqlpw"; // 데이터베이스 비밀번호
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/my_pay"; // 데이터베이스 URL
+    private static final String DB_USER = "root"; // 데이터베이스 사용자명
+    private static final String DB_PASSWORD = "password"; // 데이터베이스 비밀번호
 
     // 샘플 주소 데이터 배열
     private static final String[] ADDRESSES = {"강남구", "관악구", "서초구"};
@@ -44,7 +44,7 @@ public class DummyDataGenerator {
         PreparedStatement pstmt = conn.prepareStatement(insertQuery);
 
         // 더미 데이터 개수 (여기서는 100개로 가정)
-        int numberOfDummyData = 10000;
+        int numberOfDummyData = 10;
 
         for (int i = 1; i <= numberOfDummyData; i++) {
             pstmt.setLong(1, i); // membership_id
