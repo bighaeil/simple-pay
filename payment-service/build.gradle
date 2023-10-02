@@ -2,7 +2,7 @@ plugins {
     id 'com.palantir.docker' version '0.25.0'
 }
 
-group 'com.mypay.remittance'
+group 'com.mypay.payment'
 version = '0.0.1-SNAPSHOT'
 
 dependencies {
@@ -15,7 +15,6 @@ dependencies {
     implementation project(path: ':common')
 
     testImplementation 'junit:junit:4.13.1'
-    runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
 }
 
