@@ -54,8 +54,14 @@ public class RequestMoneyChangingController {
         return resultDetail;
     }
 
-    @PostMapping(path = "/money/decrease")
+    @PostMapping(path = "/money/decrease-eda")
     MoneyChangingResultDetail decreaseMoneyChangingRequest(@RequestBody DecreaseMoneyChangingRequest request) {
+        IncreaseMoneyRequestCommand command = IncreaseMoneyRequestCommand.builder()
+                .targetMembershipId(request.getTargetMembershipId())
+                .amount(request.getAmount() * -1)
+                .build();
+
+        increaseMoneyRequestUseCase.increaseMoneyRequestByEvent(command);
         return null;
     }
 
