@@ -20,14 +20,10 @@ import java.util.UUID;
 @Component
 public class DynamoDBAdapter implements GetMoneySumByAddressPort, InsertMoneyIncreaseEventByAddress {
     private static final String TABLE_NAME = "MoneyIncreaseEventByRegion";
-    @Value("${aws.dynamodb.access-key}")
-    private String ACCESS_KEY;
-    @Value("${aws.dynamodb.secret-key}")
-    private String SECRET_KEY;
     private final DynamoDbClient dynamoDbClient;
     private final MoneySumByAddressMapper moneySumByAddressMapper;
 
-    public DynamoDBAdapter() {
+    public DynamoDBAdapter(@Value("${aws.accessKey}") String ACCESS_KEY, @Value("${aws.secretKey}") String SECRET_KEY) {
         this.moneySumByAddressMapper = new MoneySumByAddressMapper();
         AwsBasicCredentials credentials = AwsBasicCredentials.create(ACCESS_KEY, SECRET_KEY);
         this.dynamoDbClient = DynamoDbClient.builder()
