@@ -1,12 +1,17 @@
 package com.mypay.payment.adapter.in.web;
 
 import com.mypay.common.WebAdapter;
+import com.mypay.payment.application.port.in.FinishSettlementCommand;
 import com.mypay.payment.application.port.in.RequestPaymentCommand;
 import com.mypay.payment.application.port.in.RequestPaymentUseCase;
 import com.mypay.payment.domain.Payment;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @WebAdapter
 @RestController
@@ -25,5 +30,17 @@ public class RequestPaymentController {
                         request.getFranchiseFeeRate()
                 )
         );
+    }
+
+    @GetMapping(path = "/payment/normal-status")
+    List<Payment> getNormalStatusPayments() {
+        return requestPaymentUseCase.getNormalStatusPayments();
+    }
+
+    @PostMapping(path = "/payment/finish-settlement")
+    void finishSettlement(@RequestBody FinishSettlementRequest request) {
+        System.out.println("request.getPaymentId() = " + request.getPaymentId());
+
+        requestPaymentUseCase.finishPayment(new FinishSettlementCommand(request.getPaymentId()));
     }
 }
