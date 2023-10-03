@@ -19,6 +19,8 @@ public class Membership {
     private final boolean isValid;
     @Getter
     private final boolean isCorp;
+    @Getter
+    private final String refreshToken;
 
     // Membership
     // 오염이 되면 안되는 클래스. 고객 정보. 핵심 도메인
@@ -29,7 +31,8 @@ public class Membership {
             MembershipEmail membershipEmail,
             MembershipAddress membershipAddress,
             MembershipIsValid membershipIsValid,
-            MembershipIsCorp membershipIsCorp
+            MembershipIsCorp membershipIsCorp,
+            MembershipRefreshToken membershipRefreshToken
     ) {
         return new Membership(
                 membershipId.membershipId,
@@ -37,7 +40,8 @@ public class Membership {
                 membershipEmail.emailValue,
                 membershipAddress.addressValue,
                 membershipIsValid.isValidValue,
-                membershipIsCorp.isCorpValue
+                membershipIsCorp.isCorpValue,
+                membershipRefreshToken.refreshToken
         );
     }
 
@@ -93,5 +97,14 @@ public class Membership {
         }
 
         boolean isCorpValue;
+    }
+
+    @Value
+    public static class MembershipRefreshToken {
+        public MembershipRefreshToken(String value) {
+            this.refreshToken = value;
+        }
+
+        String refreshToken;
     }
 }
